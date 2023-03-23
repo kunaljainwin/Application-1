@@ -1,16 +1,18 @@
 #include "requirements.h"
 #include "record.h"
-#include<saving_account.h>
-#include<current_account.h>
-#include<locker.h>
-#include<passbook.h>
-#include<medical_insurance.h>
-#include<life_insurance.h>
-#include<mutual_fund.h>
-#include<fixed_deposit.h>
-#include<demat.h>
-#include<nomination.h>
-#include<e_statement.h>
+#include"saving_account.h"
+#include"current_account.h"
+#include"locker.h"
+#include"passbook.h"
+#include"medical_insurance.h"
+#include"life_insurance.h"
+#include"mutual_fund.h"
+#include"fixed_deposit.h"
+#include"demat.h"
+
+#include"nomination.h"
+#include"e_statement.h"
+
 using namespace std;
 
 // Struct to store record data
@@ -67,30 +69,29 @@ int main(){
         DisplayMenu();
         int option;
         cin >> option;
-
-        if (option == 1) {
-           tagRecord::AddRecord(glisttagRecords);
-           break;
-        } else if (option == 2) {
-           tagRecord:: ModifyRecord(glisttagRecords);
-           break;
-        } else if (option == 3) {
-           tagRecord::DeleteRecord(glisttagRecords);
-           break;
-        } else if (option == 4) {
+        switch (option)
+        {
+        case 1:
+            tagRecord::AddRecord(glisttagRecords);
+            break;
+        case 2:
+            tagRecord:: ModifyRecord(glisttagRecords);
+            break;
+        case 3:
+            tagRecord::DeleteRecord(glisttagRecords);
+            break;
+        case 4:
             tagRecord::PrintRecord(glisttagRecords);
             break;
-        } 
-        else if (option == 5) {
+        case 5:
             PrintAllRecord(glisttagRecords);
             break;
-        } 
-        else if (option == 0) {
-            break;
-        }
-        
-        else {
+        case 0:
+            cout << "Exiting Software\n";
+            return 0;
+        default:
             cout << "Invalid option.\n";
+            break;
         }
     }
     
