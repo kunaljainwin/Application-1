@@ -1,5 +1,4 @@
-#include "requirements.h"
-#include "record.h"
+#include"requirements.h"
 #include"saving_account.h"
 #include"current_account.h"
 #include"locker.h"
@@ -11,11 +10,11 @@
 #include"demat.h"
 #include"nomination.h"
 #include"e_statement.h"
+#include "record.h"
 
 using namespace std;
 
 // Struct to store record data
-
 
 
 // Function to display menu options
@@ -30,10 +29,20 @@ void DisplayMenu() {
     cout << "0 . Exit\n";
     cout << "------------------------END--------------------------\n";
 }
-void PrintAllRecord(vector<tagRecord>& records){
+void PrintAllRecord(vector<tagRecord>& records,
+    map<long int,tagSavingAccount>& gMaptagSavingAccount,
+    map<long int,tagCurrentAccount>& gMaptagCurrentAccount,
+    map<long int,tagLocker>& gMaptagLocker,
+    map<long int,tagPassbook>& gMaptagPassbook,
+    map<long int,tagMedicalInsurance>& gMaptagMedicalInsurance,
+    map<long int,tagLifeInsurance>& gMaptagLifeInsurance,map<long int,
+    tagMutualFund>& gMaptagMutualFund,
+    map<long int,tagFixedDeposit>& gMaptagFixedDeposit,
+    map<long int,tagDemat>& gMaptagDemat,map<long int,tagNomination>& gMaptagNomination,
+    map<long int,tagEStatement>& gMaptagEStatement){
     const char separator = ' ';
-    const int nameWidth = 6;
-    const int numWidth = 8;
+    const int nameWidth = 14;
+    const int numWidth = 14;
     cout << left << setw (nameWidth) << setfill (separator) << "Account";
     cout << left << setw (nameWidth) << setfill (separator) << "Name";
     cout << left << setw (nameWidth) << setfill (separator) << "City";
@@ -56,6 +65,7 @@ void PrintAllRecord(vector<tagRecord>& records){
 
 // Driver program
 int main(){
+// LoadingScreen();
     // Global variables
     vector<tagRecord> glisttagRecords;
     map<long int,tagSavingAccount> gMaptagSavingAccount;
@@ -86,16 +96,28 @@ int main(){
             gMaptagFixedDeposit,gMaptagDemat,gMaptagNomination,gMaptagEStatement);
             break;
         case 2:
-            tagRecord:: ModifyRecord(glisttagRecords);
+            tagRecord:: ModifyRecord(glisttagRecords,gMaptagSavingAccount,gMaptagCurrentAccount,
+            gMaptagLocker,gMaptagPassbook,gMaptagMedicalInsurance,gMaptagLifeInsurance,
+            gMaptagMutualFund,
+            gMaptagFixedDeposit,gMaptagDemat,gMaptagNomination,gMaptagEStatement);
             break;
         case 3:
-            tagRecord::DeleteRecord(glisttagRecords);
+            tagRecord::DeleteRecord(glisttagRecords,gMaptagSavingAccount,gMaptagCurrentAccount,
+            gMaptagLocker,gMaptagPassbook,gMaptagMedicalInsurance,gMaptagLifeInsurance,
+            gMaptagMutualFund,
+            gMaptagFixedDeposit,gMaptagDemat,gMaptagNomination,gMaptagEStatement);
             break;
         case 4:
-            tagRecord::PrintRecord(glisttagRecords);
+            tagRecord::PrintRecord(glisttagRecords,gMaptagSavingAccount,gMaptagCurrentAccount,
+            gMaptagLocker,gMaptagPassbook,gMaptagMedicalInsurance,gMaptagLifeInsurance,
+            gMaptagMutualFund,
+            gMaptagFixedDeposit,gMaptagDemat,gMaptagNomination,gMaptagEStatement);
             break;
         case 5:
-            PrintAllRecord(glisttagRecords);
+            PrintAllRecord(glisttagRecords,gMaptagSavingAccount,gMaptagCurrentAccount,
+            gMaptagLocker,gMaptagPassbook,gMaptagMedicalInsurance,gMaptagLifeInsurance,
+            gMaptagMutualFund,
+            gMaptagFixedDeposit,gMaptagDemat,gMaptagNomination,gMaptagEStatement);
             break;
         case 0:
             cout << "Exiting Software\n";
