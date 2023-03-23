@@ -9,7 +9,6 @@
 #include"mutual_fund.h"
 #include"fixed_deposit.h"
 #include"demat.h"
-
 #include"nomination.h"
 #include"e_statement.h"
 
@@ -32,15 +31,24 @@ void DisplayMenu() {
     cout << "------------------------END--------------------------\n";
 }
 void PrintAllRecord(vector<tagRecord>& records){
+    const char separator = ' ';
+    const int nameWidth = 6;
+    const int numWidth = 8;
+    cout << left << setw (nameWidth) << setfill (separator) << "Account";
+    cout << left << setw (nameWidth) << setfill (separator) << "Name";
+    cout << left << setw (nameWidth) << setfill (separator) << "City";
+    cout << left << setw (nameWidth) << setfill (separator) << "Mobile";
+    cout << left << setw (nameWidth) << setfill (separator) << "Email";
+    cout<<endl;
     for (int i = 0; i < records.size(); i++) {
         if(records[i].isActive==true){
-            cout << "First name: " << records[i].lstrFirstName << endl;
-            cout << "Last name: " << records[i].lstrLastName << endl;
-            cout << "Account number: " << records[i].AccountNumber << endl;
-            cout << "City: " << records[i].lstrCity << endl;
-            cout << "Mobile number: " << records[i].lnMobileNumber << endl;
-            cout << "Email: " << records[i].lstrEmail << endl;
-            cout << "-----------------------------------\n";
+            cout << left << setw (nameWidth) << setfill (separator) << records[i].AccountNumber;
+            cout << left << setw (nameWidth) << setfill (separator) << records[i].lstrFirstName+" "+records[i].lstrLastName;
+            cout << left << setw (nameWidth) << setfill (separator) << records[i].lstrCity;
+            cout << left << setw (nameWidth) << setfill (separator) << records[i].lnMobileNumber;
+            cout << left << setw (nameWidth) << setfill (separator) << records[i].lstrEmail;
+            cout<<endl;
+  
         }
     
     }
@@ -72,7 +80,10 @@ int main(){
         switch (option)
         {
         case 1:
-            tagRecord::AddRecord(glisttagRecords);
+            tagRecord::AddRecord(glisttagRecords,gMaptagSavingAccount,gMaptagCurrentAccount,
+            gMaptagLocker,gMaptagPassbook,gMaptagMedicalInsurance,gMaptagLifeInsurance,
+            gMaptagMutualFund,
+            gMaptagFixedDeposit,gMaptagDemat,gMaptagNomination,gMaptagEStatement);
             break;
         case 2:
             tagRecord:: ModifyRecord(glisttagRecords);
