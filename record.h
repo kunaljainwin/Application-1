@@ -16,8 +16,6 @@ namespace std{
     cin >> newRecord.lstrFirstName;
     cout << "Enter last name: ";
     cin >> newRecord.lstrLastName;
-    cout << "Enter account number: ";
-    cin >> newRecord.AccountNumber;
     cout << "Enter city: ";
     cin >> newRecord.lstrCity;
     cout << "Enter mobile number: ";

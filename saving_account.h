@@ -1,3 +1,5 @@
+# pragma once
+
 namespace std{
     // Struct to store service SavingAccount
 struct tagSavingAccount {
