@@ -1,4 +1,5 @@
 #include"requirements.h"
+#include"validators.h"
 #include"saving_account.h"
 #include"current_account.h"
 #include"locker.h"
@@ -26,7 +27,7 @@ void DisplayMenu() {
     cout << "0. Exit\n";
     cout << "------------------------END--------------------------\n";
 }
-void PrintAllRecord(vector<tagRecord>& records,
+void PrintAllRecords(vector<tagRecord>& records,
     map<unsigned long int,tagSavingAccount>& gMaptagSavingAccount,
     map<unsigned long int,tagCurrentAccount>& gMaptagCurrentAccount,
     map<unsigned long int,tagLocker>& gMaptagLocker,
@@ -51,7 +52,7 @@ void PrintAllRecord(vector<tagRecord>& records,
             cout << left << setw (nameWidth) << setfill (separator) << records[i].AccountNumber;
             cout << left << setw (nameWidth) << setfill (separator) << records[i].lstrFirstName+" "+records[i].lstrLastName;
             cout << left << setw (nameWidth) << setfill (separator) << records[i].lstrCity;
-            cout << left << setw (nameWidth) << setfill (separator) << records[i].ulnMobileNumber;
+            cout << left << setw (nameWidth) << setfill (separator) << records[i].lstrMobileNumber;
             cout << left << setw (nameWidth) << setfill (separator) << records[i].lstrEmailAddress;
             cout<<endl;
         }
@@ -109,7 +110,7 @@ int main(){
             gMaptagFixedDeposit,gMaptagDemat,gMaptagNomination,gMaptagEStatement);
             break;
         case 5:
-            PrintAllRecord(glisttagRecords,gMaptagSavingAccount,gMaptagCurrentAccount,
+            PrintAllRecords(glisttagRecords,gMaptagSavingAccount,gMaptagCurrentAccount,
             gMaptagLocker,gMaptagPassbook,gMaptagMedicalInsurance,gMaptagLifeInsurance,
             gMaptagMutualFund,
             gMaptagFixedDeposit,gMaptagDemat,gMaptagNomination,gMaptagEStatement);

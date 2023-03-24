@@ -6,7 +6,7 @@ namespace std{
     string lstrFirstName;
     string lstrLastName;
     string lstrCity;
-    unsigned long int ulnMobileNumber;
+    string lstrMobileNumber;
     string lstrEmailAddress;
     bool lbActive=true;
     // Function to add record
@@ -23,18 +23,35 @@ namespace std{
     map<unsigned long int,tagEStatement>& gMaptagEStatement) {
     tagRecord newRecord;
     newRecord.AccountNumber=records.size()+1;
+    do{
     cout << "Enter first name: ";
     cin >> newRecord.lstrFirstName;
+    }
+   while(!IsNameValid(newRecord.lstrFirstName));
+    do{
+
     cout << "Enter last name: ";
     cin >> newRecord.lstrLastName;
-    cout << "Enter city: ";
+    }
+    while(!IsNameValid(newRecord.lstrLastName));
+    do{
+cout << "Enter city: ";
     cin >> newRecord.lstrCity;
-    cout << "Enter mobile number: ";
-    cin >> newRecord.ulnMobileNumber;
-    cout << "Enter email: ";
+    }
+    while(!IsNameValid(newRecord.lstrCity));
+    do{
+  cout << "Enter mobile number: ";
+    cin >> newRecord.lstrMobileNumber;
+    }
+  while(!IsPhoneNumberValid(newRecord.lstrMobileNumber));
+  do{
+  cout << "Enter email: ";
     cin >> newRecord.lstrEmailAddress;
+  }
+  while(!IsValidEmail(newRecord.lstrEmailAddress));
+  
     // pushing record to vector
-    records.push_back(newRecord);
+    // records.push_back(newRecord);
     //Services
 
      //Saving Accounts
@@ -75,123 +92,124 @@ namespace std{
             gMaptagLocker[newRecord.AccountNumber] = newLocker;
         }
 
-//         //Passbook
-//       cout << "Do you want to opt for Passbook\nKindly say Yes or No\n";
-//         string lstrInput4;
-//         cin >> lstrInput4;
-//         if(lstrInput4=="Yes")
-//         {
-//             tagPassbook newPassbook;
-//             gMaptagPassbook[newRecord.AccountNumber] = newPassbook;
-//         }
+        //Passbook
+      cout << "Do you want to opt for Passbook\nKindly say Yes or No\n";
+        string lstrInput4;
+        cin >> lstrInput4;
+        if(lstrInput4=="Yes")
+        {
+            tagPassbook newPassbook;
+            gMaptagPassbook[newRecord.AccountNumber] = newPassbook;
+        }
 
-//         //Medical Insurance
-//         cout << "Do you want to opt for Medical Insurance \nKindly say Yes or No\n";
-//         string lstrInput5;
-//         cin >> lstrInput5;
-//         if(lstrInput5=="Yes")
-//         {
-//             tagMedicalInsurance newMedicalInsurance;
-//             float lfCover;
-//             cout << "Enter Coverage amount";
-//             cin >> lfCover;
-//             newMedicalInsurance.lfCoverage = lfCover;
-//             gMaptagMedicalInsurance[newRecord.AccountNumber] = newMedicalInsurance;
-//         }
+        //Medical Insurance
+        cout << "Do you want to opt for Medical Insurance \nKindly say Yes or No\n";
+        string lstrInput5;
+        cin >> lstrInput5;
+        if(lstrInput5=="Yes")
+        {
+            tagMedicalInsurance newMedicalInsurance;
+            float lfCover;
+            cout << "Enter Coverage amount";
+            cin >> lfCover;
+            newMedicalInsurance.lfCoverage = lfCover;
+            gMaptagMedicalInsurance[newRecord.AccountNumber] = newMedicalInsurance;
+        }
 
-//         //Life Insurance
-//         cout << "Do you want to opt for Life Insurance \nKindly say Yes or No\n";
-//         string lstrInput6;
-//         cin >> lstrInput6;
-//         if(lstrInput6=="Yes")
-//         {
-//             tagLifeInsurance newLifeInsurance;
-//             int lnNUmber;
-//             cout << "Enter number of people for life insurance Coverage : ";
-//             cin >> lnNUmber;
-//             float lfCoveragePolicy;
-//             cout << "\nEnter total policy coverage amount : ";
-//             cin >> lfCoveragePolicy;
-//             newLifeInsurance.lnCount = lnNUmber;
-//             newLifeInsurance.lfPolicyCoverage = lfCoveragePolicy;
-//             gMaptagLifeInsurance[newRecord.AccountNumber] = newLifeInsurance;
-//         }
+        //Life Insurance
+        cout << "Do you want to opt for Life Insurance \nKindly say Yes or No\n";
+        string lstrInput6;
+        cin >> lstrInput6;
+        if(lstrInput6=="Yes")
+        {
+            tagLifeInsurance newLifeInsurance;
+            int lnNUmber;
+            cout << "Enter number of people for life insurance Coverage : ";
+            cin >> lnNUmber;
+            float lfCoveragePolicy;
+            cout << "\nEnter total policy coverage amount : ";
+            cin >> lfCoveragePolicy;
+            newLifeInsurance.lnCount = lnNUmber;
+            newLifeInsurance.lfPolicyCoverage = lfCoveragePolicy;
+            gMaptagLifeInsurance[newRecord.AccountNumber] = newLifeInsurance;
+        }
 
-//       //Mutual Fund
-//      cout << "Do you want to opt for Mutual funds\nKindly say Yes or No\n";
-//         string lstrInput7;
-//         cin >> lstrInput7;
-//         if(lstrInput7=="Yes")
-//         {
-//             tagMutualFund newMutualFund;
-//             cout << "Enter investment amount : ";
-//             float lfAmountInvest;
-//             cin >> lfAmountInvest;
-//             newMutualFund.lfInvestmentAmount = lfAmountInvest;
-//             gMaptagMutualFund[newRecord.AccountNumber] = newMutualFund;
-//         }
+      //Mutual Fund
+     cout << "Do you want to opt for Mutual funds\nKindly say Yes or No\n";
+        string lstrInput7;
+        cin >> lstrInput7;
+        if(lstrInput7=="Yes")
+        {
+            tagMutualFund newMutualFund;
+            cout << "Enter investment amount : ";
+            float lfAmountInvest;
+            cin >> lfAmountInvest;
+            newMutualFund.lfInvestmentAmount = lfAmountInvest;
+            gMaptagMutualFund[newRecord.AccountNumber] = newMutualFund;
+        }
        
-//    //Fixed Deposit
-//      cout << "Do you want to opt for fixed deposits\nKindly say Yes or No\n";
-//         string lstrInput8;
-//         cin >> lstrInput8;
-//         if(lstrInput8=="Yes")
-//         {
-//             tagFixedDeposit newFixedDeposit;
-//             cout << "Enter number of FD's : ";
-//             int lnFdNumber;
-//             cin >> lnFdNumber;
-//             cout << "\nEnter total deposits in FD : ";
-//             float lfAmountDepo;
-//             cin >> lfAmountDepo;
-//             newFixedDeposit.lnCount = lnFdNumber;
-//             newFixedDeposit.lfDepositAmount = lfAmountDepo;
-//             gMaptagFixedDeposit[newRecord.AccountNumber] = newFixedDeposit;
-//         }
+   //Fixed Deposit
+     cout << "Do you want to opt for fixed deposits\nKindly say Yes or No\n";
+        string lstrInput8;
+        cin >> lstrInput8;
+        if(lstrInput8=="Yes")
+        {
+            tagFixedDeposit newFixedDeposit;
+            cout << "Enter number of FD's : ";
+            int lnFdNumber;
+            cin >> lnFdNumber;
+            cout << "\nEnter total deposits in FD : ";
+            float lfAmountDepo;
+            cin >> lfAmountDepo;
+            newFixedDeposit.lnCount = lnFdNumber;
+            newFixedDeposit.lfDepositAmount = lfAmountDepo;
+            gMaptagFixedDeposit[newRecord.AccountNumber] = newFixedDeposit;
+        }
 
-//         //Demat
-//          cout << "Do you want to opt for Demat account\nKindly say Yes or No\n";
-//         string lstrInput9;
-//         cin >> lstrInput9;
-//         if(lstrInput9=="Yes")
-//         {
-//             tagDemat newDemat;
-//             gMaptagDemat[newRecord.AccountNumber] = newDemat;
-//         }
+        //Demat
+         cout << "Do you want to opt for Demat account\nKindly say Yes or No\n";
+        string lstrInput9;
+        cin >> lstrInput9;
+        if(lstrInput9=="Yes")
+        {
+            tagDemat newDemat;
+            gMaptagDemat[newRecord.AccountNumber] = newDemat;
+        }
 
-//         //Nomination
-//         cout << "Do you want to add nomination\nKindly say Yes or No\n";
-//         string lstrInput10;
-//         cin >> lstrInput10;
-//         if(lstrInput10=="Yes")
-//         {
-//             tagNomination newNomination;
-//             int lnNumber;
-//             cout << "Enter number of nominations : ";
-//             cin >> lnNumber;
-//             vector<string> NomineeName(lnNumber);
-//             for (int i = 0; i < lnNumber;i++)
-//             {
-//                 string lstrNaam;
-//                 cout << "Enter name of nominee ";
-//                 cin >> lstrNaam;
-//                 NomineeName.push_back(lstrNaam);
-//             }
-//             newNomination.lnCount = lnNumber;
-//             newNomination.Nominee.emplace_back(NomineeName);
-//             gMaptagNomination[newRecord.AccountNumber] = newNomination;
-//         }
+        //Nomination
+        cout << "Do you want to add nomination\nKindly say Yes or No\n";
+        string lstrInput10;
+        cin >> lstrInput10;
+        if(lstrInput10=="Yes")
+        {
+            tagNomination newNomination;
+            int lnNumber;
+            cout << "Enter number of nominations : ";
+            cin >> lnNumber;
+            vector<string> NomineeName(lnNumber);
+            for (int i = 0; i < lnNumber;i++)
+            {
+                string lstrNaam;
+                cout << "Enter name of nominee ";
+                cin >> lstrNaam;
+                NomineeName.push_back(lstrNaam);
+            }
+            newNomination.lnCount = lnNumber;
+            newNomination.Nominee=NomineeName;
+            gMaptagNomination[newRecord.AccountNumber] = newNomination;
+        }
 
-//         //Estatement
-//         cout << "Do you want to get estatement\nKindly say Yes or No\n";
-//         string lstrInput11;
-//         cin >> lstrInput11;
-//         if(lstrInput11=="Yes")
-//         {
-//             tagEStatement newEstatement;
-//             gMaptagEStatement[newRecord.AccountNumber] = newEstatement;
-//         }
+        //Estatement
+        cout << "Do you want to get estatement\nKindly say Yes or No\n";
+        string lstrInput11;
+        cin >> lstrInput11;
+        if(lstrInput11=="Yes")
+        {
+            tagEStatement newEstatement;
+            gMaptagEStatement[newRecord.AccountNumber] = newEstatement;
+        }
 
+    records.push_back(newRecord);
     //change color  of text to green in console
     SetColor(10);
     // system("color 0A");
@@ -271,7 +289,7 @@ static void ModifyRecord(vector<tagRecord>& records,
                      records[lnAccountNumber-1].lstrFirstName = lstrFirstName;
                      records[lnAccountNumber-1].lstrLastName = lstrLastName;
                      records[lnAccountNumber-1].lstrCity = lstrCity;
-                     records[lnAccountNumber-1].ulnMobileNumber = llMobile;
+                     records[lnAccountNumber-1].lstrMobileNumber = llMobile;
                      records[lnAccountNumber-1].lstrEmailAddress= lstrEmailAddress;
                      SetColor(10);
                     puts("Changes made successfully.");
@@ -313,7 +331,7 @@ static void PrintRecord(vector<tagRecord>& records,
             cout << "Last name: " << records[index].lstrLastName << endl;
             cout << "Account number: " << records[index].AccountNumber << endl;
             cout << "City: " << records[index].lstrCity << endl;
-            cout << "Mobile number: " << records[index].ulnMobileNumber << endl;
+            cout << "Mobile number: " << records[index].lstrMobileNumber << endl;
             cout << "Email: " << records[index].lstrEmailAddress << endl;
             cout << "-----------------------------------\n";
             cout << "Services:\n";
