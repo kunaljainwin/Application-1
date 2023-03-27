@@ -4,7 +4,9 @@
 #include<iostream>
 #include<string.h>
 #include<iomanip>
-#include<stdlib.h>
+// #include<stdlib.h>// not needed
+// #include<fstreambase> // not working
+#include<fstream>
 #include<windows.h>
 #include<thread>
 
@@ -16,7 +18,6 @@ void LoadingScreen(){
         std::cout << ".";
         std::this_thread::sleep_for(std::chrono::seconds());
     }
-    
 }
 // Usage:
 // SetColor(10); => green text line
@@ -29,7 +30,7 @@ void SetColor(unsigned short color){
 using namespace std;
 
 
-bool IsPhoneNumberValid(string phoneNumber){
+bool IsMobileNumberValid(string phoneNumber){
     if(phoneNumber.length()!=10){
         return false;
     }

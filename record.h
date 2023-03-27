@@ -2,7 +2,7 @@
 namespace std{
 
     struct tagRecord {
-    unsigned long int AccountNumber;
+    unsigned long AccountNumber;
     string lstrFirstName;
     string lstrLastName;
     string lstrCity;
@@ -11,9 +11,9 @@ namespace std{
     bool lbActive=true;
     // Function to add record
     static void AddRecord(vector<tagRecord>& records,
-    map<unsigned long int,tagSavingAccount>& gMaptagSavingAccount,
-    map<unsigned long int,tagCurrentAccount>& gMaptagCurrentAccount,
-    map<unsigned long int,tagLocker>& gMaptagLocker,
+    map<unsigned long,tagSavingAccount>& gMaptagSavingAccount,
+    map<unsigned long,tagCurrentAccount>& gMaptagCurrentAccount,
+map<unsigned long int,tagLocker>& gMaptagLocker,
     map<unsigned long int,tagPassbook>& gMaptagPassbook,
     map<unsigned long int,tagMedicalInsurance>& gMaptagMedicalInsurance,
     map<unsigned long int,tagLifeInsurance>& gMaptagLifeInsurance,map<unsigned long int,
@@ -43,10 +43,10 @@ cout << "Enter city: ";
   cout << "Enter mobile number: ";
     cin >> newRecord.lstrMobileNumber;
     }
-  while(!IsPhoneNumberValid(newRecord.lstrMobileNumber));
+  while(!IsMobileNumberValid(newRecord.lstrMobileNumber));
   do{
   cout << "Enter email: ";
-    cin >> newRecord.lstrEmailAddress;
+  cin >> newRecord.lstrEmailAddress;
   }
   while(!IsValidEmail(newRecord.lstrEmailAddress));
   
@@ -173,6 +173,9 @@ cout << "Enter city: ";
         if(lstrInput9=="Yes")
         {
             tagDemat newDemat;
+            cout << "Enter Demat Account Number : ";
+            // cin >> arr;
+            scanf("%s",&newDemat.lcNumber);
             gMaptagDemat[newRecord.AccountNumber] = newDemat;
         }
 
@@ -184,15 +187,19 @@ cout << "Enter city: ";
         {
             tagNomination newNomination;
             int lnNumber;
-            cout << "Enter number of nominations : ";
+            cout << "Enter number of nominations (MAX 3): ";
             cin >> lnNumber;
+            lnNumber=min(lnNumber,3);
             vector<string> NomineeName(lnNumber);
-            for (int i = 0; i < lnNumber;i++)
+            for (int i = 0; i <lnNumber;i++)
             {
-                string lstrNaam;
+                string lstrName;
+                do{
                 cout << "Enter name of nominee ";
-                cin >> lstrNaam;
-                NomineeName.push_back(lstrNaam);
+                }
+                while(!IsNameValid(lstrName));
+                cin >> lstrName;
+                NomineeName.push_back(lstrName);
             }
             newNomination.lnCount = lnNumber;
             newNomination.Nominee=NomineeName;
@@ -216,12 +223,6 @@ cout << "Enter city: ";
     puts("Record added successfully.");
     //change color  of text to white in console
     SetColor(7);
-
-    
-
-
-
-
     
 }
 
@@ -240,16 +241,17 @@ static void DisplayMenuModifyRecord() {
 }
 // Function to modify an existing record
 static void ModifyRecord(vector<tagRecord>& records,
-    map<unsigned long int,tagSavingAccount>& gMaptagSavingAccount,
-    map<unsigned long int,tagCurrentAccount>& gMaptagCurrentAccount,
-    map<unsigned long int,tagLocker>& gMaptagLocker,
-    map<unsigned long int,tagPassbook>& gMaptagPassbook,
-    map<unsigned long int,tagMedicalInsurance>& gMaptagMedicalInsurance,
-    map<unsigned long int,tagLifeInsurance>& gMaptagLifeInsurance,map<unsigned long int,
-    tagMutualFund>& gMaptagMutualFund,
-    map<unsigned long int,tagFixedDeposit>& gMaptagFixedDeposit,
-    map<unsigned long int,tagDemat>& gMaptagDemat,map<unsigned long int,tagNomination>& gMaptagNomination,
-    map<unsigned long int,tagEStatement>& gMaptagEStatement) {
+    map<unsigned long ,tagSavingAccount>& gMaptagSavingAccount,
+    map<unsigned long ,tagCurrentAccount>& gMaptagCurrentAccount,
+    map<unsigned long ,tagLocker>& gMaptagLocker,
+    map<unsigned long ,tagPassbook>& gMaptagPassbook,
+    map<unsigned long ,tagMedicalInsurance>& gMaptagMedicalInsurance,
+    map<unsigned long ,tagLifeInsurance>& gMaptagLifeInsurance,
+    map<unsigned long ,tagMutualFund>& gMaptagMutualFund,
+    map<unsigned long ,tagFixedDeposit>& gMaptagFixedDeposit,
+    map<unsigned long ,tagDemat>& gMaptagDemat,
+    map<unsigned long ,tagNomination>& gMaptagNomination,
+    map<unsigned long ,tagEStatement>& gMaptagEStatement) {
     /// services need not be modified
     int lnAccountNumber;
         cout<<"Enter account number to modify it's record : ";
@@ -260,27 +262,48 @@ static void ModifyRecord(vector<tagRecord>& records,
             if(records[lnAccountNumber-1].lbActive)
             {
                 string lstrFirstName;
+                string lstrLastName;
+                    string lstrCity;
+                    string llMobile;
+                    string lstrEmailAddress;
+               do{
                 cout<<"Enter new first name : ";
                 cin>>lstrFirstName;
+               }
+               while(!IsNameValid(lstrFirstName));
 
-                string lstrLastName;
+              do{
                 cout<<"Enter new last name : ";
                 cin>>lstrLastName;
-                string lstrCity;
+              }
+              while(!IsNameValid(lstrLastName));
+               do{
                 cout<<"Enter new city : ";
                 cin>>lstrCity;
-                unsigned long llMobile;
-                cout<<"Enter new mobile number : ";
-                cin>>llMobile;
-                string lstrEmailAddress;
-                cout<<"Enter new email address : ";
-                cin>>lstrEmailAddress;
-                 
-                 cout << "Enter 0 to Discard changes and Exit or any key to save\n";
+               }
+                while(!IsNameValid(lstrCity));
               
-                 int lnInput;
-                 cin>>lnInput;
-                 if(lnInput==0)
+                
+                
+               do{
+                 cout<<"Enter new mobile number : ";
+                cin>>llMobile;
+               }
+               while(!IsMobileNumberValid(llMobile));
+                
+                do{
+                    cout<<"Enter new email address : ";
+                cin>>lstrEmailAddress;
+                }
+                while (!IsValidEmail(lstrEmailAddress));
+               
+                
+                 
+                 cout << "Enter 0 to Discard changes and Exit or any other key to save\n";
+              
+                bool lbInput;
+                 cin>>lbInput;
+                 if(!lbInput)
                  {
                      cout<<"Changes Discarded\n";
                  }
@@ -334,10 +357,12 @@ static void PrintRecord(vector<tagRecord>& records,
             cout << "Mobile number: " << records[index].lstrMobileNumber << endl;
             cout << "Email: " << records[index].lstrEmailAddress << endl;
             cout << "-----------------------------------\n";
+            SetColor(23);
             cout << "Services:\n";
+            SetColor(7);
             auto itrSavingAccount=gMaptagSavingAccount.find(accountNumber);
+            cout << "Saving Account\n";
             if(itrSavingAccount!=gMaptagSavingAccount.end()){
-                cout << "Saving Account\n";
             cout<<"Account balance: "<<itrSavingAccount->second.lfBalance<<endl;
             }
             auto itrCurrentAccount=gMaptagCurrentAccount.find(accountNumber);
@@ -368,7 +393,6 @@ static void PrintRecord(vector<tagRecord>& records,
             auto itrMutualFund=gMaptagMutualFund.find(accountNumber);
             if(itrMutualFund!=gMaptagMutualFund.end()){
                 cout << "Mutual Fund\n";
-                
                 cout<<"Amount: "<<itrMutualFund->second.lfInvestmentAmount<<endl;
             }
 
@@ -383,14 +407,12 @@ static void PrintRecord(vector<tagRecord>& records,
                 cout << "Demat\n";
                 
             }
-
             auto itrNomination=gMaptagNomination.find(accountNumber);
             if(itrNomination!=gMaptagNomination.end()){
                 cout << "Nomination\n";
                 for(auto &it:itrNomination->second.Nominee){
                     cout<<it<<endl;
                 }
-                
             }
             auto itrEStatement=gMaptagEStatement.find(accountNumber);
             if(itrEStatement!=gMaptagEStatement.end()){

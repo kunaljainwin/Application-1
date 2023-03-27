@@ -1,4 +1,4 @@
 struct tagDemat
 {
-    char lcNumber[16];
+    char lcNumber[17];
 };
